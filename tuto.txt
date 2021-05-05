@@ -1,0 +1,5 @@
+npx create-react-app . --template typescript // . is to show that we are creating our project in the current folder
+
+delete everything we don't need like logo, tests, everything from App.tsx what we don't need
+
+npm install --save @types/react-router-dom react-router-dom // --save puts it to package.json file, it allows us to do navigation in our dom
