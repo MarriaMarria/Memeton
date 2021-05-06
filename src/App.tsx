@@ -1,51 +1,36 @@
-import React, { useState } from 'react'
-import MyMessage from "./components/MyMessage";
-import Navbar from "./components/FirstComponent";
-
+import React, { useState } from 'react';
+import Navbar from "./components/navbar";
 import './App.css';
+import './navbar.css';
+import Body from "./components/body";
+import './body.css';
+import Button from "./components/button";
+import Login_register_form from "./components/login_register_form"
+
 
 function App() {
 
-  const [counter, setCounter] = useState<number>(0);
-  const [text, setText] = useState<string | null>("")
-  const displayMessage = (message: string) => {
-    console.log(message)
-  }
+    let coucou = "Hello, is it me you looking for" // just checking
+    let clickRegistration = true;
+    
+    const changeClickRegistration = (value: boolean) => {
+        clickRegistration = value;
+        console.log(clickRegistration) // to check if he sees true/false
+    }
 
-  return (
-    <div className="App">
-      
-      <Navbar />
+    return (
+        <div className="App">
 
-      <h1>Typescript to JavaScript</h1>
+            <Body />
+            <Button onLogin={changeClickRegistration}/>
+                <div>
+                    { clickRegistration }
+                    { coucou }
+                </div>
+            <Login_register_form isRegistration={clickRegistration}/>
 
-      {counter}
-
-      <button onClick={() => {
-        setCounter(counter + 1)
-      }}
-      >
-        Increase 1
-      </button>
-
-      <br></br>
-      <br></br>
-
-      {text}
-
-      <input type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        setText(e.target.value);
-      }}
-      />
-
-      <button onClick={() => {displayMessage("Hello nice people")}}>Show mymessage</button>
-
-      <MyMessage message="Wassup, who ever codes in php???" age={19}/>
-      
-      
-
-    </div>
-  );
+        </div>
+    );
 }
 
 

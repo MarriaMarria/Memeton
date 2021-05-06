@@ -1,0 +1,12 @@
+.container-nav {
+    text-align: center;
+    background-color: azure;
+}
+
+.App-navbar {
+    background-color: #7498df;
+    min-height: 15vh;
+    display: flex;
+    font-size: calc(10px + 1vmin);
+    color: white;
+}
