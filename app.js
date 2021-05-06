@@ -46,6 +46,6 @@ app.get('/all_meme', function (req, res) {
 
 
 
-app.listen(3000, function () {
-  console.log('Hello world app listening on port 3000!')
-})
+// app.listen(3000, function () {
+//   console.log('Hello world app listening on port 3000!')
+// })
