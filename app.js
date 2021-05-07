@@ -84,7 +84,7 @@ app.get('/all_meme', function (req, res) {
 })
 
 //méthode post pour envoyer des données à mon serveur
-app.post('/register',async function (req, res){
+app.get('/register',async function (req, res){
     
     try {
         //Définition des variables qui vont récuperer les données
@@ -155,7 +155,7 @@ app.post('/register',async function (req, res){
 })
 
 
-app.post('/login', async function (req, res){
+app.get('/login', async function (req, res){
     try {
         //Définition des variables qui vont récuperer les données
         const username_query = req.body.username;
