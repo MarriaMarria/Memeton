@@ -1,23 +1,17 @@
 import React from 'react'
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 // import 'button.css'
 
 
+export default function Button(props: any) {    // we tell him that we will pass him a props onLogin
 
-export default function Button(props: {onLogin: any}) {    // we tell him that we will pass him a props onLogin
-
-    const toggle_login = (isLogin: boolean) => {
+    const buttonText = props.buttonText; // I tell what I want I want as props
+    console.log(props);
     
-        props.onLogin(isLogin); 
-        
-    }
-
-    
-
     return (
-        <div className="Buttons">
-            <button className="buttonUpload" onClick={() => toggle_login(true)}>Login</button>
-            <button className="buttonRegister" onClick={() => toggle_login(false)}>Register</button>
+        <div>
+            <button>{buttonText}</button>
         </div>
+        
     )
 }
-// when Login is pressed the function receives onLogin = true; the parent will catch info with event listener onLogin

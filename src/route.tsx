@@ -10,7 +10,7 @@ export const Routes = () => {
         <div>
             <Navbar />
             <Switch>
-                <Route exact path="/home" component={App} />
+                <Route exact path="/" component={App} />
                 <Route exact path="/login" component={Login_register_form} />  //* I will change app to Login */
                 <Route exact path="/register" component={Login_register_form} />  //* I will change app to Login */
             </Switch>

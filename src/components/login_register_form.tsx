@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default function Login_register_form(props: {isRegistration: boolean}) {
+export default function Login_register_form(props: any) {
 
-    // ! THE PROBLEM: pass with props from parent (page) to kid info about state of button; it is passed but only ONCE, and after it doesn't react to the change of boolean 
+    const isRegistration: boolean = props.location.state.isRegistration;
+    // state works as props, so we pass it to our link
     
     const expanded_form = () => {
-        if (props.isRegistration) {
+        if (isRegistration === true) {
             return (
                 <div>
                     <div className="form-example">
