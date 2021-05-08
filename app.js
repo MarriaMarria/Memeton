@@ -84,7 +84,7 @@ app.get('/all_meme', function (req, res) {
 })
 
 //méthode post pour envoyer des données à mon serveur
-app.get('/register',async function (req, res){
+app.post('/register',async function (req, res){
     
     try {
         //Définition des variables qui vont récuperer les données
@@ -141,11 +141,13 @@ app.get('/register',async function (req, res){
         
         //console.log(token);
 
-        res.send({
-            'response : ' : "A new user has been created",
-            'my username :' : username_query,
-            'my password :' : password_query
+        //stockage du token dans les cookies
+        res.cookie("token", token, {
+            httpOnly : true,
         })
+            .send({
+                'response : ' : "A new user has been created",
+            })
     } catch (err) {
         console.log(err);
         res.status(500).send();
@@ -155,7 +157,7 @@ app.get('/register',async function (req, res){
 })
 
 
-app.get('/login', async function (req, res){
+app.post('/login', async function (req, res){
     try {
         //Définition des variables qui vont récuperer les données
         const username_query = req.body.username;
