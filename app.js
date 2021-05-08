@@ -1,19 +1,28 @@
-let express = require('express')
+//let express = require('express')
+import express from 'express';
 const app = express()
 var port = process.env.PORT || 3000
 
 // Librairie pour encoder mes mots de passes
-const bcrypt = require("bcryptjs")
+//const bcrypt = require("bcryptjs")
+import bcrypt from 'bcryptjs'
 
 // Librairie pour les token de vérification
-const jwt = require("jsonwebtoken")
+//const jwt = require("jsonwebtoken")
+import jwt from 'jsonwebtoken'
 
-require('dotenv').config()
+//require('dotenv').config()
+import dotenv from "dotenv";
+dotenv.config({ silent: process.env.NODE_ENV === 'production' });
 
-const cors = require("cors")
+//const cors = require("cors")
+import cors from 'cors'
 app.use(cors());
 
-const MongoClient = require('mongodb').MongoClient;
+//const MongoClient = require('mongodb').MongoClient;
+//import { MongoClient } from 'mongodb';
+import MongoClient from 'mongodb';
+
 const url = process.env.CONNECTION_STRING
 
 app.use(express.json());
@@ -201,8 +210,68 @@ app.post('/login', async function (req, res){
     }
 })
 
+////////////////Storage ////////
 
-app.listen(port, function () {
-  console.log('Server on port ' + port )
+import { BlobServiceClient } from "@azure/storage-blob";
+//const { BlobServiceClient} = require("@azure/storage-blob");
+// import config from '/config.js';
+
+
+
+const blobServiceClient = BlobServiceClient.fromConnectionString(process.env.CONNECTION_STRING1);
+
+//const multer  = require('multer')
+import multer, { memoryStorage } from 'multer';
+const inMemoryStorage = multer.memoryStorage();
+const uploadStrategy = multer({ storage: inMemoryStorage }).single('image');
+//const getStream = require('into-stream');
+import getStream from 'into-stream';
+
+
+app.post('/upload', uploadStrategy, async (req, res) => {
+  console.log("post")
+  const blobName = req.file.originalname;
+  // const blobName = getBlobName(req.file.originalname);
+  const stream = getStream(req.file.buffer);
+  const containerClient = blobServiceClient.getContainerClient(containerName);;
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+  //uploadOptions.bufferSize
+  try {
+    await blockBlobClient.uploadStream(stream,
+      { blobHTTPHeaders: { blobContentType: "image/jpeg" } });
+      res.status(200).send('OK')
+    //res.send('success', { message: 'File uploaded to Azure Blob storage.' });
+    //res.header('Content-Type', 'text/html').send("<html>lol</html>");
+  } catch (err) {
+    res.status(400).send(err)
+    console.log(err)
+    //res.send('error', { message: err.message });
+  }});
+
+////////////////////
+const account = "memelonstorage";
+
+
+///const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net`);
+
+const containerName = "meme";
+
+app.get('/allblob', uploadStrategy, async (req, res) => {
+  const containerClient = blobServiceClient.getContainerClient(containerName);
+
+  let i = 1;
+ 
+  let blobs = containerClient.listBlobsFlat();
+  const array1 = []
+  for await (const blob of blobs) {
+    array1.unshift(blob)
+    console.log(`Blob ${i++}: ${blob.name}`);
+  }
+  res.status(200).send(array1)
 })
 
+
+
+app.listen(port, function () {
+  console.log('Server on port ' + port )})
