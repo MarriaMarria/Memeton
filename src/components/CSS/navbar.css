@@ -16,3 +16,10 @@
   color: violet;
   margin: 0.7em;
 }
+
+h3 {
+  font-size: 4em;
+  color: #fff;
+  letter-spacing: 6px;
+  text-shadow: 0 0 5px #fff, 0 0 5px rgb(87, 11, 11);
+}

@@ -9,9 +9,8 @@ export default function Button(props: any) {    // we tell him that we will pass
     console.log(props);
     
     return (
-        <div>
-            <button className="basicButton">{buttonText}</button>
-        </div>
+
+        <button className="buttonGlowOnHover" type="button">{buttonText}</button>
         
     )
 }

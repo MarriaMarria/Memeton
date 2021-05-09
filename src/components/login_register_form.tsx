@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from "axios";
 import Button from "./button"
+import './CSS/login_register_form.css'
+import H2 from "./h2"
+
 
 type userInfo = {
     username: String;
@@ -17,44 +20,64 @@ export default function Login_register_form(props: any) {
     // ! props.location.state.... => how I pass the data via router
 
 
-    const expanded_form = () => {
+    // const expanded_form = () => {
         if (isRegistration === true) {
             return (
-
+                
                 <div>
-                    <label htmlFor="email">Verify password </label>
-                    <input type="text" name="password" id="password"  required />
 
+                <div className="container">
+                    <H2 h2Text="Login"/>
+                    <form>
+                        <label htmlFor="name">Username </label>
+                        <input type="text" name="username" id="username" required />
+                    </form>
+                    <form>
+                        <label htmlFor="email">Password </label>
+                        <input type="password" name="password" id="password" required />
+                    <form className="verifyPwd">
+                        <label htmlFor="verify pwd">Verify password </label>
+                        <input type="text" name="password" id="password"  required />
+                    </form>
+                        <div>
+                            <Button buttonText="Submit" />
+                        </div>
+    
+                    </form>
                 </div>
-
+    
+    
+            
+            </div>
             )
+            
+        
+
+            
         } else {
-            return null
+            return (
+            <div>
+
+            <div className="container">
+                <H2 h2Text="Login"/>
+                <form>
+                    <label htmlFor="name">Username </label>
+                    <input type="text" name="username" id="username" required />
+                </form>
+                <form>
+                    <label htmlFor="email">Password </label>
+                    <input type="password" name="password" id="password" required />
+
+                    <div>
+                        <Button buttonText="Submit" />
+                    </div>
+
+                </form>
+            </div>
+
+
+        
+        </div>
+        )
         }
     }
-    const html_element = (
-        <form action="" method="get">
-
-
-
-            <div>
-                <label htmlFor="name">Username </label>
-                <input type="text" name="username" id="username" required />
-            </div>
-            <div>
-                <label htmlFor="email">Password </label>
-                <input type="password" name="password" id="password" required />
-            </div>
-
-
-            {expanded_form()}
-            <div>
-                <Button buttonText="Submit" />
-            </div>
-        </form>
-
-    )
-
-    return html_element
-
-}

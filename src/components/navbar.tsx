@@ -7,7 +7,7 @@ import './CSS/navbar.css'
 export default function Navbar() {
     return (
         <nav className="container-nav">
-            <h3>Memeton</h3>
+            <h3>MEMETON</h3>
             <div className="userButtons">
                 <Link to={{ pathname: "/login", state: {isRegistration:false} }}><Button buttonText="Login" /></Link>
                 <Link to={{ pathname: "/register", state: {isRegistration:true} }}><Button buttonText="Register" /></Link>
