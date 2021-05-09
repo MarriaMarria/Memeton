@@ -1,6 +1,6 @@
 .container-nav {
   text-align: center;
-  background-color: azure;
+  background: rgba(255, 255, 255, 0.95);
   display: flex;
   justify-content: space-between;
   width: 100%;

@@ -5,21 +5,20 @@ import Button from './button'
 
 export default function Home() {
     return (
-        <div className="container-body">
+        <div>
+            <div className="container-body">
+                
+            <h1 className="neon">MEMETON</h1>
             
-            <div className="container">
- 
-
-            
-                <h1 className="neon">MEMETON</h1>
-            
-            </div>
+        </div>
             <h2>The wonderful world of memes</h2>
                 
-            {/* {<DisplayMeme /> }    */}
-            <Link to={{ pathname: "/all_meme"}}><Button buttonText="See all memes" /></Link>
+                <div className="seeAllMemesButton">
+                    
+                    <Link to={{ pathname: "/all_meme"}}><Button buttonText="See all memes" /></Link>
+            
+                </div>
         </div>
-        
     )
 
 }

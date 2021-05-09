@@ -3,7 +3,7 @@ import axios from "axios";
 import Button from "./button"
 import './CSS/login_register_form.css'
 import H2 from "./h2"
-
+import ButtonHome from './btnBackHome'
 
 type userInfo = {
     username: String;
@@ -41,6 +41,7 @@ export default function Login_register_form(props: any) {
                     </form>
                         <div>
                             <Button buttonText="Submit" />
+                            {/* <ButtonHome btnHomeText="Back home" /> */}
                         </div>
     
                     </form>
