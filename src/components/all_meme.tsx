@@ -1,5 +1,5 @@
 import * as React from "react";
-import DisplayMeme from './callApi'
+import DisplayMeme from './callMemeApi'
 
 export default function All_meme() {
     return (

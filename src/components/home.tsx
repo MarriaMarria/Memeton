@@ -1,5 +1,5 @@
 import * as React from "react";
-import DisplayMeme from './callApi'
+import DisplayMeme from './callMemeApi'
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Button from './button'
 
