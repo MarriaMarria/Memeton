@@ -1,9 +1,9 @@
 import React from 'react';
-import App from './App'
-import Navbar from './components/navbar'
+import App from '../App'
+import Navbar from './navbar'
 
 import { Route, Switch } from 'react-router-dom';
-import Login_register_form from './components/login_register_form';
+import Login_register_form from './login_register_form';
 
 export const Routes = () => {
     return (

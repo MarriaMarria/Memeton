@@ -1,0 +1,18 @@
+.container-nav {
+  text-align: center;
+  background-color: azure;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.userButtons {
+  display: flex;
+  padding: 0.7em;
+}
+
+.container-nav h3 {
+  font-size: 3em;
+  font-weight: bold;
+  color: violet;
+  margin: 0.7em;
+}

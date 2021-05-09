@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-// import 'button.css'
+import './CSS/button.css'
 
 
 export default function Button(props: any) {    // we tell him that we will pass him a props onLogin
@@ -10,7 +10,7 @@ export default function Button(props: any) {    // we tell him that we will pass
     
     return (
         <div>
-            <button>{buttonText}</button>
+            <button className="basicButton">{buttonText}</button>
         </div>
         
     )

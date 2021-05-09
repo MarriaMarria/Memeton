@@ -1,0 +1,28 @@
+How do we pass parameters or props?
+
+Let's check our Button function:
+
+export default function Button(props: any) {  
+
+    const buttonText = props.buttonText; 
+    console.log(props);
+    
+    return (
+        <div>
+            <button>{buttonText}</button>
+        </div>
+        
+    )
+}
+
+I pass to the function parameters with word props. Then , in the body of the function, I create a variable, to which I give good and clear name revealing what it does, and I assign it to our parameter (props.buttonText). Then, in return, I put my variable between the curly braces, which means that it is dynamic and will be changing based on what is passed to it in the moment the function Button is called.
+
+So, when I call my function Button, I do it like so:
+
+<Button buttonText="Register"/>
+
+I pass my parameter buttonText and assign it a value "Register". I can reuse my button as many times as I want, and all I have to do is only to change the text in Buttontext variable
+
+___________________________________________________________
+
+useEffect hook : 
