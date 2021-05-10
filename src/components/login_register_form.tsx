@@ -18,7 +18,7 @@ export default function Login_form() {
     // ! props.location.state.... => how I pass the data via router
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
- 
+
 
     async function login_func(e:any){
 
@@ -39,7 +39,7 @@ export default function Login_form() {
             console.error(err)           
         }
     }  
-         
+
         return (
 
 
@@ -64,7 +64,6 @@ export default function Login_form() {
                         <Button buttonText="Submit" />
                         <Link to={{ pathname: "/"}}><ButtonHome btnHomeText="Back home" /></Link>
                     </div>
-
                 </form>
             </div>
         )       

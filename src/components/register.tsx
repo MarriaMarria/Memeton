@@ -15,7 +15,6 @@ type userInfo = {
 export default function Register_form() {
 
 
-  
     // state works as props, so we pass it to our link;
     // ! props.location.state.... => how I pass the data via router
     const [username, setUsername] = useState("");
