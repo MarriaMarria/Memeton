@@ -9,7 +9,7 @@ export default function Button(props: any) {    // we tell him that we will pass
     
     return (
 
-        <button className="buttonGlowOnHover" type="button">{buttonText}</button>
+        <button className="buttonGlowOnHover" type="submit">{buttonText}</button>
         
     )
 }
