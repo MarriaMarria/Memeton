@@ -317,7 +317,7 @@ const uploadStrategy = multer({ storage: inMemoryStorage }).single('image');
 import getStream from 'into-stream';
 
 
-app.post('/uploadoth', uploadStrategy, async (req, res) => {
+app.post('/upload', uploadStrategy, async (req, res) => {
   console.log("post")
   const blobName = req.file.originalname;
   // const blobName = getBlobName(req.file.originalname);
@@ -339,7 +339,7 @@ app.post('/uploadoth', uploadStrategy, async (req, res) => {
   }});
 
 ///////////////////// upload with autentification///////////////////
-app.post('/upload', authentification, uploadStrategy, async (req, res) => {
+app.post('/uploadoth', authentification, uploadStrategy, async (req, res) => {
     console.log("post")
     const blobName = req.file.originalname;
     // const blobName = getBlobName(req.file.originalname);
