@@ -3,23 +3,26 @@ import App from '../App'
 import Navbar from './navbar'
 
 import { Route, Switch } from 'react-router-dom';
-import LoginForm from './login_register_form';
+import Login_register_form from './login_register_form';
+import Register_form from './register';
 import All_meme from './all_meme';
+import { AuthContextProvider } from './AuthContext';
 import Add_meme from './add_meme'
-import RegisterForm from './register';
 
 export const Routes = () => {
     return (
         <div>
+            <AuthContextProvider>
             <Navbar />
             <Switch>
                 <Route exact path="/" component={App} />
-                <Route exact path="/login" component={LoginForm} />  
-                <Route exact path="/register" component={RegisterForm} /> 
+                <Route exact path="/login" component={Login_register_form} />  
+                <Route exact path="/register" component={Register_form} /> 
                 <Route exact path="/all_meme" component={All_meme} /> 
                 <Route exact path="/upload" component={Add_meme} />
 
             </Switch>
+            </AuthContextProvider>
         </div>
     )
 }

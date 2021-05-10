@@ -8,6 +8,7 @@ export default function Add_meme() {
         <div>
             <input type="file"/>
             <Button buttonText="Upload image"/>
+            <p>This is a test</p>
         </div>
     )
 
