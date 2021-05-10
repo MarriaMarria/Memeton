@@ -165,6 +165,39 @@ app.post('/register',async function (req, res){
 
 })
 
+//Je crée une variable d'identification qui check que le token dans mes cookies à été créé avec le token de mon serveur
+const authentification = (req, res, next) => {
+    try {
+        //on teste avec un cookie fait maison car POSTMAN ne permet pas de storer les cookie
+        // req.cookies.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjA5NTZkMDY1OWY3NTk0NmJkNjA4YTBhIiwiaWF0IjoxNjIwNDA4NDU1fQ.Is98mbNhapVixYF2uO2UHFPmyph7ZL2esfMYH6KqTww";  
+        const token_cookie = req.cookies.token
+
+        //Si il n'y a pas de token => erreur
+        if (!token_cookie){ 
+            return res.status(401).json({errorMessage : "token fail"})
+        }
+
+
+        //comparaison des 2 tokens
+        const decoded = jwt.verify(token_cookie, process.env.JWT_PASSWORD);
+        
+        //console.log(decoded)
+
+        // Dans decoded.user il y a la variable que j'ai mis lors de la création du token => _id de mon user, j'attribu a req.user l'id de mon user et ma constante va storer cette valeur que je vais utiliser dans ma rout /add_meme comme variable d'identification => qui a poster le meme
+        req.user = decoded.user
+        
+        console.log("token ok");
+
+        //On peut continuer vu que la vérification s'est bien passée
+        next()
+  
+    } catch (err) {
+      console.log(err);
+      res.status(401).json({
+          errorMessage : "token fail"
+        })
+    }
+}
 
 app.post('/login', async function (req, res){
     try {
@@ -209,6 +242,62 @@ app.post('/login', async function (req, res){
         res.status(500).send();
     }
 })
+app.get("/logout", function(req, res) {
+    //je remplace mon token par une string vie et je le détruit => double destruction
+    res.cookie("token","", {
+        //seul mon browser peu lire le token et pas le js
+        httpOnly : true,
+        //je donne une date qui est déja passé donc le cookie va disparaitre
+        expires : new Date(0)
+    }).send({
+        'response : ' : 'You have been logged out'
+    })
+})
+
+//Route qui sert a dire SI je suis loggé ou pas => renvoie TRUE ou FALSE
+app.get("/loggedIn", function (req,res) {
+
+    //On reprend notre middleware d'authentification avec quelques modif
+    try {
+        //on teste avec un cookie fait maison car POSTMAN ne permet pas de storer les cookie 
+        const token_cookie = req.cookies.token
+
+        //Si il n'y a pas de token => false 
+        if (!token_cookie){ 
+            console.log("pas de cookies")
+            return res.json(false)
+        }
+
+        console.log("Avant vérif")
+        // Si la verif de token crash car mauvais token => catch => false
+        jwt.verify(token_cookie, process.env.JWT_PASSWORD);
+        console.log("apres vérif")
+        //si le token est vérifié =>
+        res.send(true)
+        
+    //S'il y a eu une erreur on renvoie false et non ERROR
+    } catch (err) {
+        console.log(err);
+        res.json(false)
+    }
+    
+})
+
+//Endpoint privé (seul un utilisateur authentifié peut l'utiliser) qui met un lien dans la BDD avec le username
+// on va tester dans postman avec un token existant : "token : ": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjA5NTZkMDY1OWY3NTk0NmJkNjA4YTBhIiwiaWF0IjoxNjIwNDA4NDU1fQ.Is98mbNhapVixYF2uO2UHFPmyph7ZL2esfMYH6KqTww"
+app.post('/add_meme', authentification ,async function (req, res){
+    try {
+        const name_meme_query = req.body.name_meme
+        
+        //Je peux voir qui a poster le meme grâce a l'_id
+        console.log("mon user:", req.user)
+        res.send(name_meme_query)     
+
+    } catch(err) {
+        console.error(err);
+        res.status(500).send();
+    }  
+})
 
 ////////////////Storage ////////
 
@@ -221,14 +310,14 @@ import { BlobServiceClient } from "@azure/storage-blob";
 const blobServiceClient = BlobServiceClient.fromConnectionString(process.env.CONNECTION_STRING1);
 
 //const multer  = require('multer')
-import multer, { memoryStorage } from 'multer';
+import multer from 'multer';
 const inMemoryStorage = multer.memoryStorage();
 const uploadStrategy = multer({ storage: inMemoryStorage }).single('image');
 //const getStream = require('into-stream');
 import getStream from 'into-stream';
 
 
-app.post('/upload', uploadStrategy, async (req, res) => {
+app.post('/uploadoth', uploadStrategy, async (req, res) => {
   console.log("post")
   const blobName = req.file.originalname;
   // const blobName = getBlobName(req.file.originalname);
@@ -248,6 +337,28 @@ app.post('/upload', uploadStrategy, async (req, res) => {
     console.log(err)
     //res.send('error', { message: err.message });
   }});
+
+///////////////////// upload with autentification///////////////////
+app.post('/upload', authentification, uploadStrategy, async (req, res) => {
+    console.log("post")
+    const blobName = req.file.originalname;
+    // const blobName = getBlobName(req.file.originalname);
+    const stream = getStream(req.file.buffer);
+    const containerClient = blobServiceClient.getContainerClient(containerName);;
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  
+    //uploadOptions.bufferSize
+    try {
+      await blockBlobClient.uploadStream(stream,
+        { blobHTTPHeaders: { blobContentType: "image/jpeg" } });
+        res.status(200).send('OK')
+      //res.send('success', { message: 'File uploaded to Azure Blob storage.' });
+      //res.header('Content-Type', 'text/html').send("<html>lol</html>");
+    } catch (err) {
+      res.status(400).send(err)
+      console.log(err)
+      //res.send('error', { message: err.message });
+    }});
 
 ////////////////////
 const account = "memelonstorage";
