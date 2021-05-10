@@ -4,6 +4,10 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Routes } from './components/route';
 import "./components/CSS/index.css"
+import axios from "axios";
+
+//Permettre à mes cookies d'etre recupérés depuis le back
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>
