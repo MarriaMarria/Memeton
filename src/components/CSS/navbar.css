@@ -1,6 +1,6 @@
 .container-nav {
   text-align: center;
-  background-color: azure;
+  background: rgba(255, 255, 255, 0.95);
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -15,4 +15,11 @@
   font-weight: bold;
   color: violet;
   margin: 0.7em;
+}
+
+h3 {
+  font-size: 4em;
+  color: #fff;
+  letter-spacing: 6px;
+  text-shadow: 0 0 5px #fff, 0 0 5px rgb(87, 11, 11);
 }

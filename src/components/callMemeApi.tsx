@@ -4,20 +4,14 @@ import './CSS/memeContainer.css';
 const DisplayMeme = () => {
     const [memes, setMemes] = useState([]);
 
-
-    // `http://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_GIPHY_KEY}&limit=100`
-
     useEffect(() => { // useEffect is a hook
-        // fetch(`http://api.giphy.com/v1/gifs/trending?api_key=76792192255c42c3a11c58ea1acfbe27&limit=100`)
         fetch('http://localhost:3004/all_meme')
             .then(res =>
-                // res.json().then(response => setMemes(response.data))
                 res.json().then(response => setMemes(response))
             );
     }, []); // empty array means the effect is working on mount
 
     return (
-        
 
         <div className="memeContainer">
 
@@ -28,6 +22,7 @@ const DisplayMeme = () => {
                 
         </div>
 
+//! To see how to parse my JSON I go to network in inspect browser, in this case I have a list with url objects inside, so I use map to loop throw all of thel and find each ones url. 
     );
 }
 
