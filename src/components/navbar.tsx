@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import { Link } from "react-router-dom"
 import Button from "./button"
 import AuthContext from "./AuthContext"
+import Logout from "./Logout"
 
 import './CSS/navbar.css'
 
@@ -19,6 +20,13 @@ export default function Navbar() {
                 <Link to={{ pathname: "/register"}}><Button buttonText="Register" /></Link>
             </div>
             </>)}
+            {loggedIn === true && (
+            <>
+            <div className="buttonGlowOnHover">
+                <Link to={{ pathname: "/logout" }}><Logout/></Link>
+            </div>
+            </>)}
+
         </nav>        
     )
 }
