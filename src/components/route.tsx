@@ -8,6 +8,7 @@ import Register_form from './register';
 import All_meme from './all_meme';
 import { AuthContextProvider } from './AuthContext';
 import Logout from './Logout';
+import Upload from './upload';
 
 export const Routes = () => {
     return (
@@ -20,7 +21,7 @@ export const Routes = () => {
                 <Route exact path="/register" component={Register_form} /> 
                 <Route exact path="/all_meme" component={All_meme} /> 
                 <Route exact path="/logout" component={Logout} />
-
+                <Route exact path="/upload" component={Upload} />
             </Switch>
             </AuthContextProvider>
         </div>

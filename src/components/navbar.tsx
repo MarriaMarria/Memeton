@@ -23,7 +23,10 @@ export default function Navbar() {
             {loggedIn === true && (
             <>
             <div className="buttonGlowOnHover">
-                <Link to={{ pathname: "/logout" }}><Logout/></Link>
+            <span><Link to={{ pathname: "/logout" }}><Logout/></Link></span>
+            </div>
+            <div className="userButtons">
+            <Link to={{ pathname: "/upload"}}><Button buttonText="Upload" /></Link>
             </div>
             </>)}
 
