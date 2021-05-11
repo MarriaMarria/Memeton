@@ -8,13 +8,12 @@ const bcrypt = require("bcryptjs")
 // Librairie pour les token de vérification
 const jwt = require("jsonwebtoken")
 
-//librairie pour transformer les cookie en json
-const cookieParser = require("cookie-parser")
-
 require('dotenv').config()
 
+//librairie pour transformer les cookie en json
+const cookieParser = require("cookie-parser")
 const cors = require("cors")
-
+app.use(cors());
 
 const MongoClient = require('mongodb').MongoClient;
 const url = process.env.CONNECTION_STRING
