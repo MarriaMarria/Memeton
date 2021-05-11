@@ -1,9 +1,10 @@
-import React , {useState} from 'react';
+import React , {useContext, useState} from 'react';
 import axios from "axios";
 import Button from "./button"
 import './CSS/login_register_form.css'
 import ButtonHome from './btnBackHome'
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
+import AuthContext from './AuthContext';
 
 type userInfo = {
     username: String;
@@ -19,7 +20,9 @@ export default function Login_form() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-
+    const {getLoggedIn} = useContext(AuthContext);
+    const history = useHistory();
+    
     async function login_func(e:any){
 
         e.preventDefault();
@@ -34,6 +37,10 @@ export default function Login_form() {
             await axios.post("http://localhost:3000/login", loginData, {
                 withCredentials: true
             })
+            await getLoggedIn();
+            
+            history.push("/");
+
 
         } catch (err:any) {
             console.error(err)           

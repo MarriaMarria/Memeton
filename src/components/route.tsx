@@ -7,7 +7,7 @@ import Login_register_form from './login_register_form';
 import Register_form from './register';
 import All_meme from './all_meme';
 import { AuthContextProvider } from './AuthContext';
-import Add_meme from './add_meme'
+import Logout from './Logout';
 
 export const Routes = () => {
     return (
@@ -19,7 +19,7 @@ export const Routes = () => {
                 <Route exact path="/login" component={Login_register_form} />  
                 <Route exact path="/register" component={Register_form} /> 
                 <Route exact path="/all_meme" component={All_meme} /> 
-                <Route exact path="/upload" component={Add_meme} />
+                <Route exact path="/logout" component={Logout} />
 
             </Switch>
             </AuthContextProvider>

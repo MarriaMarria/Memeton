@@ -1,9 +1,11 @@
-import React , {useState} from 'react';
+import React , {useState, useContext} from 'react';
 import axios from "axios";
 import Button from "./button"
 import './CSS/login_register_form.css'
 import ButtonHome from './btnBackHome'
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
+import AuthContext from './AuthContext';
+
 
 type userInfo = {
     username: String;
@@ -14,6 +16,8 @@ type userInfo = {
 
 export default function Register_form() {
 
+    const {getLoggedIn} = useContext(AuthContext);
+    const history = useHistory();
 
     // state works as props, so we pass it to our link;
     // ! props.location.state.... => how I pass the data via router
@@ -33,7 +37,9 @@ export default function Register_form() {
             };
 
             //Requete post au back qui sera changé pour le lien Azure
-            await axios.post("http://localhost:3000/register", registerData)
+            await axios.post("http://localhost:3000/register", registerData);
+            await getLoggedIn();           
+            history.push("/");
 
         } catch (err:any) {
             console.error(err)           
