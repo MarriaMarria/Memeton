@@ -34,7 +34,7 @@ export default function Login_form() {
             };
 
             //Requete post au back qui sera changé pour le lien Azure
-            await axios.post("http://localhost:3000/login", loginData, {
+            await axios.post("https://memeton-back.azurewebsites.net/login", loginData, {
                 withCredentials: true
             })
             await getLoggedIn();

@@ -37,7 +37,7 @@ export default function Register_form() {
             };
 
             //Requete post au back qui sera changé pour le lien Azure
-            await axios.post("http://localhost:3000/register", registerData);
+            await axios.post("https://memeton-back.azurewebsites.net/register", registerData);
             await getLoggedIn();           
             history.push("/");
 

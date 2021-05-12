@@ -20,7 +20,7 @@ function AuthContextProvider(props:any) {
   async function getLoggedIn() {
       //requete a mon endpoint logginIn qui va me renvoyer true ou false
       const loggedInRes = await axios.get(
-        "http://localhost:3000/loggedIn"
+        "https://memeton-back.azurewebsites.net/loggedIn"
       );
 
       console.log("loggé ?:", loggedInRes.data)

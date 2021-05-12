@@ -10,7 +10,7 @@ function Logout() {
     const history = useHistory();
 
     async function logOut(){
-        await axios.get("http://localhost:3000/logout");
+        await axios.get("https://memeton-back.azurewebsites.net/logout");
         await getLoggedIn();
         //Redirection vers la page d'accueil
         history.push("/")

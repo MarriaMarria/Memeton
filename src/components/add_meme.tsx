@@ -1,14 +1,15 @@
 import * as React from "react";
 import Button from "./button"
+import Upload from "./uploadMemeApi";
+import './CSS/upload.css'
 
 
-
-export default function FileUploader(){
-    const handleFileInput = () => {}
+export default function UploadPage() {
 
     return (
-        <div className="file-uploader">
-            <input type="file" onChange={handleFileInput} />
+        <div className="uploadContainer">
+            <h1>Upload your own meme!</h1>
+            <Upload />
         </div>
     )
 }

@@ -5,7 +5,6 @@ import FileUploader from './add_meme'
 export default function All_meme() {
     return (
         <div className="container-body">
-            <FileUploader /> 
             {<DisplayMeme /> }   
         </div>
         
