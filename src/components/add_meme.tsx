@@ -1,16 +1,15 @@
 import * as React from "react";
 import Button from "./button"
+import Upload from "./uploadMemeApi";
+import './CSS/upload.css'
 
 
+export default function UploadPage() {
 
-export default function Add_meme() {
     return (
-        <div>
-            <input type="file"/>
-            <Button buttonText="Upload image"/>
-            <p>This is a test</p>
+        <div className="uploadContainer">
+            <h1>Upload your own meme!</h1>
+            <Upload />
         </div>
     )
-
 }
-

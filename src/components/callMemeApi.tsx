@@ -5,7 +5,7 @@ const DisplayMeme = () => {
     const [memes, setMemes] = useState([]);
 
     useEffect(() => { // useEffect is a hook
-        fetch('http://localhost:3000/all_meme')
+        fetch('https://memeton-back.azurewebsites.net/all_meme')
             .then(res =>
                 res.json().then(response => setMemes(response))
             );
