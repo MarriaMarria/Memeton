@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(
     cors({
         //Mon front réact est déployé sur le port 3001
-        origin: ["http://localhost:3001"],
+        origin: ["http://176.159.58.151:3001"],
         //permettre l'envoie des cookies à mon front
         credentials:true,
     })
